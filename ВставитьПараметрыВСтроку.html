@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ВставитьПараметрыВСтроку</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        h2 {
+            font-size: 22px;
+            margin-top: 20px;
+        }
+        p, pre {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .box {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+        }
+        .box-text {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>ВставитьПараметрыВСтроку</h1>
+
+    <div class="section">
+        <p class="box-text">
+            Заменяет в шаблоне строки имена параметров на их значения. Параметры в строке выделяются с двух сторон квадратными скобками.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Синтаксис</h2>
+        <div class="box">функция ВставитьПараметрыВСтроку(Знач ШаблонСтроки, Знач Параметры) Экспорт</div>
+    </div>
+
+    <div class="section">
+        <h2>Параметры</h2>
+        <div class="box">
+            ШаблонСтроки - Строка  - строка, в которую необходимо вставить значения.
+            Параметры    - Структура - подставляемые значения параметров, где ключ - имя параметра без специальных символов,
+                                     значение - вставляемое значение.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Возвращаемое значение</h2>
+        <div class="box">Строка – строка со вставленными значениями.</div>
+    </div>
+
+    <div class="section">
+        <h2>Пример вызова</h2>
+        <div class="box">
+            Значения = Новый Структура("Фамилия,Имя", "Иванов", "Иван");
+            Результат = СтроковыеФункцииКлиентСервер.ВставитьПараметрыВСтроку("Здравствуйте, [Имя] [Фамилия].", Значения);
+            // возвращает: "Здравствуйте, Иван Иванов".
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Доступность</h2>
+        <div class="box">Сервер, Тонкий клиент, Толстый клиент, Внешнее соединение</div>
+    </div>
+</body>
+</html>
