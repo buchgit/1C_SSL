@@ -5,37 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ВывестиИнформациюОБОшибке</title>
     <style>
+        /* Стиль: ГорчичныйТемный */
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            background-color: #f8f9fa;
-            color: #212529;
+            background-color: #121212;
+            color: #e0e0e0;
+            line-height: 1.8;
         }
         h1 {
-            font-size: 28px;
-            font-weight: bold;
+            font-size: 34px;
+            color: #ffcc00;
+            margin-bottom: 15px;
+            text-align: center;
         }
         h2 {
-            font-size: 22px;
-            margin-top: 20px;
+            font-size: 26px;
+            color: #ff9800;
+            margin-top: 25px;
+            border-bottom: 2px solid #ff9800;
+            padding-bottom: 8px;
         }
         p, pre {
-            margin: 10px 0;
+            margin: 15px 0;
             font-size: 16px;
         }
         .section {
-            margin-bottom: 20px;
+            margin-bottom: 35px;
         }
         .box {
-            background-color: #ffffff;
-            border: 1px solid #dee2e6;
-            padding: 10px;
-            border-radius: 4px;
+            background-color: #1c1c1c;
+            border: 1px solid #333;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
             font-family: 'Courier New', Courier, monospace;
             white-space: pre-wrap;
+            overflow-x: auto;
+            font-size: 16px;
+            color: #e0e0e0;
         }
         .box-text {
-            font-family: Arial, sans-serif;
+            background-color: #212121;
+            border-left: 5px solid #ff9800;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        pre {
+            background-color: #1c1c1c;
+            border: 1px solid #333;
+            border-radius: 5px;
+            padding: 15px;
+            font-size: 15px;
+            overflow-x: auto;
+            color: #e0e0e0;
+        }
+        code {
+            background: #333333;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 15px;
+            color: #ffcc00;
+        }
+        .highlight {
+            background-color: #333333;
+            color: #ffcc00;
+            padding: 10px;
+            border-left: 5px solid #ff9800;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .center {
+            text-align: center;
+        }
+        ul {
+            margin: 10px 0 10px 20px;
+            font-size: 16px;
         }
     </style>
 </head>
@@ -44,7 +91,7 @@
 
     <div class="section">
         <p class="box-text">
-            Вызывает метод ПоказатьИнформациюОбОшибке объекта ОбработкаОшибок.
+            Вызывает метод <code>ПоказатьИнформациюОбОшибке</code> объекта <code>ОбработкаОшибок</code>.
             Требуется использовать для возможности автоматического тестирования,
             чтобы перехватывать ошибки с помощью расширения.
         </p>
