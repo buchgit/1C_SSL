@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Документация по функции ВыполнитьВФоне в 1С:Предприятие">
+    <title>Документация: ВыполнитьВФоне в 1С</title>
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --text-light: #e0e0e0;
+            --accent-yellow: #ffcc00;
+            --accent-orange: #ff9800;
+            --code-bg: #1c1c1c;
+            --border-dark: #333;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+        h1 {
+            color: var(--accent-yellow);
+            text-align: center;
+            font-size: 2.125rem;
+            margin-bottom: 1rem;
+        }
+        h2 {
+            color: var(--accent-orange);
+            font-size: 1.625rem;
+            margin-top: 1.5rem;
+            border-bottom: 2px solid var(--accent-orange);
+            padding-bottom: 0.5rem;
+        }
+        .box, pre {
+            background: var(--code-bg);
+            border: 1px solid var(--border-dark);
+            border-radius: 8px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+        }
+        code {
+            background: #333;
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            color: var(--accent-yellow);
+        }
+        .highlight {
+            background: #333;
+            border-left: 5px solid var(--accent-orange);
+            padding: 0.625rem;
+        }
+        .step-title {
+            color: #d4a017;
+            font-weight: bold;
+            display: block;
+            margin: 0.625rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ВыполнитьВФоне</h1>
+    </header>
+
+    <main>
+        <article class="section">
+            <p class="box">
+                <strong>Рекомендация:</strong> Используйте функции <code>ВыполнитьФункцию</code> или <code>ВыполнитьПроцедуру</code> вместо этой.<br>
+                Для проверки завершения операции используйте <code>ДлительныеОперацииКлиент.ОжидатьЗавершение</code> или <code>ЗаданиеВыполнено</code>.
+            </p>
+        </article>
+
+        <section class="section">
+            <h2>Синтаксис</h2>
+            <pre aria-label="Синтаксис функции">функция ВыполнитьВФоне(Знач ИмяПроцедуры, Знач ПараметрыПроцедуры, Знач ПараметрыВыполнения) Экспорт</pre>
+        </section>
+
+        <section class="section">
+            <h2>Параметры</h2>
+            <div class="box">
+                <strong>ИмяПроцедуры</strong> (<code>Строка</code>) — имя экспортной процедуры в общем модуле или модуле обработки.<br>
+                <strong>ПараметрыПроцедуры</strong> (<code>Структура</code>) — аргументы для вызова.<br>
+                <strong>ПараметрыВыполнения</strong> — см. <code>ДлительныеОперации.ПараметрыВыполненияВФоне</code>.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Возвращаемое значение</h2>
+            <div class="box">
+                <code>Структура</code> с полями:<br>
+                • <strong>Статус</strong> (<code>Строка</code>): "Выполняется", "Выполнено", "Ошибка", "Отменено".<br>
+                • <strong>ИдентификаторЗадания</strong> (<code>УникальныйИдентификатор</code>).<br>
+                • <strong>АдресРезультата</strong> (<code>Строка</code>).<br>
+                • <strong>ИнформацияОбОшибке</strong> (<code>ИнформацияОбОшибке</code>).
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Пример вызова</h2>
+            <div class="box">
+                <span class="step-title">1) Процедура в модуле:</span>
+                <pre><code>Процедура ВыполнитьДействие(Параметры, АдресРезультата) Экспорт
+    ...
+    ПоместитьВоВременноеХранилище(Результат, АдресРезультата);
+КонецПроцедуры</code></pre>
+
+                <span class="step-title">2) Запуск на сервере:</span>
+                <pre><code>&amp;НаКлиенте
+Процедура ВыполнитьДействие()
+    ДлительнаяОперация = НачатьВыполнениеНаСервере();
+    ...
+КонецПроцедуры</code></pre>
+
+                <span class="step-title">3) Обработка результата:</span>
+                <pre><code>&amp;НаКлиенте
+Процедура ВыполнитьДействиеЗавершение(Результат, ДополнительныеПараметры) Экспорт
+    Если Результат.Статус = "Ошибка" Тогда
+        ПоказатьОшибку(Результат.ИнформацияОбОшибке);
+    КонецЕсли;
+КонецПроцедуры</code></pre>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Доступность</h2>
+            <div class="box">Сервер, Толстый клиент, Внешнее соединение</div>
+        </section>
+    </main>
+</body>
+</html>
