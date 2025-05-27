@@ -18,38 +18,46 @@
             margin: 20px;
             background: var(--bg-dark);
             color: var(--text-light);
-            line-height: 1.4; /* Уменьшен интервал между строками */
+            line-height: 1.4;
         }
         h1 {
             color: var(--accent-yellow);
             text-align: center;
             font-size: 2.125rem;
-            margin: 0.5rem 0; /* Уменьшен отступ */
+            margin: 0.5rem 0;
         }
         h2 {
             color: var(--accent-orange);
             font-size: 1.625rem;
-            margin: 0.8rem 0; /* Уменьшен отступ */
+            margin: 0.8rem 0;
             border-bottom: 2px solid var(--accent-orange);
             padding-bottom: 0.3rem;
         }
         .section {
-            margin-bottom: 1.2rem; /* Уменьшен отступ между секциями */
+            margin-bottom: 1.2rem;
         }
         .box, pre {
             background: var(--code-bg);
             border: 1px solid var(--border-dark);
             border-radius: 8px;
-            padding: 0.8rem; /* Уменьшен padding */
+            padding: 0.8rem;
             overflow-x: auto;
             font-family: 'Courier New', monospace;
             white-space: pre-wrap;
-            line-height: 1.3; /* Уменьшен интервал в блоках кода */
-            margin: 0.5rem 0; /* Уменьшен отступ */
+            line-height: 1.3;
+            margin: 0.5rem 0;
+        }
+        .columns {
+            display: flex;
+            gap: 20px;
+            margin: 0.5rem 0;
+        }
+        .column {
+            flex: 1;
         }
         code {
             background: #333;
-            padding: 0.1em 0.3em; /* Уменьшен padding */
+            padding: 0.1em 0.3em;
             border-radius: 3px;
             color: var(--accent-yellow);
             line-height: 1.2;
@@ -64,15 +72,14 @@
             color: #d4a017;
             font-weight: bold;
             display: block;
-            margin: 0.3rem 0; /* Уменьшен отступ */
+            margin: 0.3rem 0;
         }
         p {
-            margin: 0.5rem 0; /* Уменьшен отступ */
+            margin: 0.5rem 0;
         }
     </style>
 </head>
 <body>
-    <!-- Остальное содержимое без изменений -->
     <header>
         <h1>ВыполнитьВФоне</h1>
     </header>
@@ -85,7 +92,64 @@
             </p>
         </article>
 
-        <!-- Остальные секции -->
+        <section class="section">
+            <h2>Синтаксис</h2>
+            <pre aria-label="Синтаксис функции">функция ВыполнитьВФоне(Знач ИмяПроцедуры, Знач ПараметрыПроцедуры, Знач ПараметрыВыполнения) Экспорт</pre>
+        </section>
+
+        <section class="section">
+            <div class="columns">
+                <div class="column">
+                    <h2>Параметры</h2>
+                    <div class="box">
+                        <strong>ИмяПроцедуры</strong> (<code>Строка</code>) — имя экспортной процедуры в общем модуле или модуле обработки.<br><br>
+                        <strong>ПараметрыПроцедуры</strong> (<code>Структура</code>) — аргументы для вызова.<br><br>
+                        <strong>ПараметрыВыполнения</strong> — см. <code>ДлительныеОперации.ПараметрыВыполненияВФоне</code>.
+                    </div>
+                </div>
+                <div class="column">
+                    <h2>Возвращаемое значение</h2>
+                    <div class="box">
+                        <code>Структура</code> с полями:<br><br>
+                        • <strong>Статус</strong> (<code>Строка</code>): "Выполняется", "Выполнено", "Ошибка", "Отменено".<br><br>
+                        • <strong>ИдентификаторЗадания</strong> (<code>УникальныйИдентификатор</code>).<br><br>
+                        • <strong>АдресРезультата</strong> (<code>Строка</code>).<br><br>
+                        • <strong>ИнформацияОбОшибке</strong> (<code>ИнформацияОбОшибке</code>).
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Пример вызова</h2>
+            <div class="box">
+                <span class="step-title">1) Процедура в модуле:</span>
+                <pre><code>Процедура ВыполнитьДействие(Параметры, АдресРезультата) Экспорт
+    ...
+    ПоместитьВоВременноеХранилище(Результат, АдресРезультата);
+КонецПроцедуры</code></pre>
+
+                <span class="step-title">2) Запуск на сервере:</span>
+                <pre><code>&amp;НаКлиенте
+Процедура ВыполнитьДействие()
+    ДлительнаяОперация = НачатьВыполнениеНаСервере();
+    ...
+КонецПроцедуры</code></pre>
+
+                <span class="step-title">3) Обработка результата:</span>
+                <pre><code>&amp;НаКлиенте
+Процедура ВыполнитьДействиеЗавершение(Результат, ДополнительныеПараметры) Экспорт
+    Если Результат.Статус = "Ошибка" Тогда
+        ПоказатьОшибку(Результат.ИнформацияОбОшибке);
+    КонецЕсли;
+КонецПроцедуры</code></pre>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Доступность</h2>
+            <div class="box">Сервер, Толстый клиент, Внешнее соединение</div>
+        </section>
     </main>
 </body>
 </html>
